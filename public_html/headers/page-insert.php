@@ -1,6 +1,8 @@
 <?
 $link=mysqli_connect("localhost", "proger7545_serv", "20002011m", "proger7545_serv");
-if (isset($_COOKIE['id']) and isset($_COOKIE['hash'])){
+?>
+
+<?if (isset($_COOKIE['id']) and isset($_COOKIE['hash'])){
     $query = mysqli_query($link, "SELECT *,INET_NTOA(user_ip) AS user_ip FROM users_test WHERE user_id = '".intval($_COOKIE['id'])."' LIMIT 1");
     $userdata = mysqli_fetch_assoc($query);
 
@@ -9,15 +11,13 @@ if (isset($_COOKIE['id']) and isset($_COOKIE['hash'])){
         setcookie("hash", "", time() - 3600*24*30*12, "/", null, null, true); // httponly !!!
         print "Хм, что-то не получилось";
     }
-    else{//main-funcs
-      //include("action-insert.php");
+    else{
         /*
 
-
+        В это место нужно попробовать добавить html
 
         */
         //файл insert.php
-        /*
         if(isset($_POST['submit']))
         {
             $err = [];
@@ -51,7 +51,7 @@ if (isset($_COOKIE['id']) and isset($_COOKIE['hash'])){
                 $password = md5(md5(trim($_POST['password'])));
 
                 mysqli_query($link,"INSERT INTO users_test SET f_name = '".$fname."', l_name = '".$lname."', user_login='".$login."', user_password='".$password."', level_p = '".$levelp."'");
-                header("Location:cabinet.php"); exit();
+                header("Location:../cabinet.php"); exit();
             }
             else
             {
@@ -61,7 +61,7 @@ if (isset($_COOKIE['id']) and isset($_COOKIE['hash'])){
                     print $error."<br>";
                 }
             }
-        }*/
+        }
         //конец insert.php
     }
 }
@@ -82,7 +82,7 @@ else{
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/checkout/">
 
     <!-- Bootstrap core CSS -->
-<link href="assets/styles/bootstrap.css" rel="stylesheet">
+<link href="../assets/styles/bootstrap.css" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -101,19 +101,20 @@ else{
       }
     </style>
     <!-- Custom styles for this template -->
-    <link href="form-validation.css" rel="stylesheet">
+    <link href="../form-validation.css" rel="stylesheet">
   </head>
   <body class="bg-light">
     <div class="container">
   <div class="py-5 text-center">
-    <img class="mb-4" src="assets/images/logo-b.png" alt="" width="150" height="91">
+    <img class="mb-4" src="../assets/images/logo-b.png" alt="" width="150" height="91">
     <h2>Добавление сотрудника</h2>
+    <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
   </div>
-  <div class="row justify-content-md-center">
+  <div class="row">
 
     <?if($userdata['level_p'] == 3){
-      //include("headers/redeem-insert.php");
-      include("headers/form-insert.php");
+      include("redeem-insert.php");
+      include("form-insert.php");
     }
 
 
@@ -123,12 +124,12 @@ else{
   </div>
 
   <?
-    include("headers/footer-insert.php");
+    include("footer-insert.php");
   ?>
 
 
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-      <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="assets/dist/js/bootstrap.bundle.js"></script>
-        <script src="form-validation.js"></script></body>
+      <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../assets/dist/js/bootstrap.bundle.js"></script>
+        <script src="../form-validation.js"></script></body>
 </html>
